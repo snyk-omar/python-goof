@@ -4,11 +4,17 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
+    - name: Build Python Project
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+        architecture: 'x64'
+    - run: pip install -r pip-sample/requirements.txt
     - uses: actions/checkout@master
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/python@master
       env:
-        COMMAND: "pip3 install -r pip-sample/requirements.txt"
+        # COMMAND: "pip3 install -r pip-sample/requirements.txt"
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         args: 
